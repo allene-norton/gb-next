@@ -3,7 +3,7 @@ import Container from '../Components/container'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import { getStudents, updateBeltRank, updateStatus } from '../utils/airtable'
+import { getRows, updateRow } from '../utils/baserow'
 
 
 /* 
@@ -107,13 +107,13 @@ function HomePage(props) {
                 <div className='header'><h1>{props.clientName}</h1></div>
                 <div className='flex-container'>
                     <div className='row'>Select Student:
-                        <div className='custom-select'>
+                        {/* <div className='custom-select'>
                             <select className="select-selected" onChange={e => { setSelected(e.target.value) }}>
                                 <option value="select student">Select Student</option>
                                 {props.allStudents.map((student) =>
                                     <option key={student.recordId} value={student.recordId}>{student.name}</option>)}
                             </select>
-                        </div>
+                        </div> */}
                     </div>
                     <div className='row'>Current rank: <span className='input'>{rank}</span></div>
                     <div className='row'>Verified: <span className='input'>{isVerified}</span></div>
@@ -181,19 +181,25 @@ export async function getServerSideProps(context) {
     // -------------AIRTABLE API -------------------
 
 
-    const allStudents = await getStudents(searchId) // Calls Airtable API to get all students matched on client name
-    const sortStudents = allStudents.sort(function (a, b) {
-        let textA = a.name.toUpperCase()
-        let textB = b.name.toUpperCase()
-        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-    })
+    // const allStudents = await getStudents(searchId) // Calls Airtable API to get all students matched on client name
+    // const sortStudents = allStudents.sort(function (a, b) {
+    //     let textA = a.name.toUpperCase()
+    //     let textB = b.name.toUpperCase()
+    //     return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    // })
+
+
+    // -------------BASEROW API -------------------
+
+    await getRows()
+    await updateRow()
 
 
     // -----------PROPS-----------------------------
     return {
         props: {
-            clientName: searchId,
-            allStudents: sortStudents,
+            // clientName: searchId,
+            // allStudents: sortStudents,
         }
     }
 }

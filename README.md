@@ -14,3 +14,6 @@ This repo is a next.js app that uses the Copilot and Airtable APIs to populate d
 
 ### constants.js
 - Contains constants got Gracie Barra Airtable bases and tables
+
+
+

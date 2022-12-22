@@ -3,7 +3,7 @@ import Container from '../Components/container'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import { getRows, updateRow } from '../utils/baserow'
+import { minifyLocations, updateRow } from '../utils/baserow'
 
 
 /* 
@@ -190,9 +190,11 @@ export async function getServerSideProps(context) {
 
 
     // -------------BASEROW API -------------------
+  
 
-    await getRows()
-    await updateRow()
+   let locations = await minifyLocations()
+   console.log(locations)
+    // await updateRow()
 
 
     // -----------PROPS-----------------------------

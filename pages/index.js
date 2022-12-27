@@ -3,7 +3,7 @@ import Container from '../Components/container'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import { minifyLocations, updateRow } from '../utils/baserow'
+import { minifyLocations, minifyStudents, updateRowLoop } from '../utils/baserow'
 
 
 /* 
@@ -97,6 +97,7 @@ function HomePage(props) {
         } else { return null }
     }
 
+    // console.log(props.matches)
 
     return (
         <>
@@ -190,17 +191,20 @@ export async function getServerSideProps(context) {
 
 
     // -------------BASEROW API -------------------
-  
 
-   let locations = await minifyLocations()
-   console.log(locations)
-    // await updateRow()
+
+    //    let locations = await minifyLocations()
+    // let students = await minifyStudents()
+    updateRowLoop()
+    // await updateRow(7)
+    // await updateRow(8)
+    
 
 
     // -----------PROPS-----------------------------
     return {
         props: {
-            // clientName: searchId,
+            // matches: matches,
             // allStudents: sortStudents,
         }
     }

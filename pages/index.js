@@ -3,7 +3,7 @@ import Container from '../Components/container'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import { minifyLocations, minifyStudents, updateRowLoop } from '../utils/baserow'
+import { minifyLocations, minifyStudents, updateRowLoop, updateRow} from '../utils/baserow'
 
 
 /* 
@@ -195,9 +195,10 @@ export async function getServerSideProps(context) {
 
     //    let locations = await minifyLocations()
     // let students = await minifyStudents()
-    updateRowLoop()
+    // updateRow(17)
     // await updateRow(7)
     // await updateRow(8)
+    await updateRowLoop()
     
 
 

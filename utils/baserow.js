@@ -107,23 +107,27 @@ const updateLink = async (rowId, locationId) => {
     }).then(console.log(`updated row: ${rowId}`))
 }
 
-export const updateRow = async (page) => {
-    let locations = await minifyLocations()
+export const updateRow = async (page, locations) => {
+    // let locations = await minifyLocations()
     let students = await minifyStudents(page)
     let linkId;
     let matches = await compareArrays(locations, students)
     // console.log(matches[0])
-    matches.forEach((match) => updateLink(match.studentId, match.locationId))
+    // matches.forEach((match) => updateLink(match.studentId, match.locationId))
+    for (const match of matches) {
+        await updateLink(match.studentId, match.locationId);
+    }
 
 }
 
 export const updateRowLoop = async () => {
-    let num = 12;
+    let locations = await minifyLocations()
+    let num = 18;
     while (num < 440) {
         allStudents = []
-        await updateRow(num);
+        await updateRow(num, locations);
         num += 1;
-        await new Promise(resolve => setTimeout(resolve, 90000));  // 1.5 minutes in milliseconds
+        await new Promise(resolve => setTimeout(resolve, 3000));  // 1.5 minutes in milliseconds
     }
 }
 

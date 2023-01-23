@@ -1,4 +1,4 @@
-import axios from "axios"
+const axios = require('axios')
 let locations = []
 let count = 0
 
@@ -11,11 +11,12 @@ const locationsId = 9
 
 
 
+
 let allLocations = []
 let miniLocations = []
 
 
-export const minifyLocations = async (page = 1) => {
+const minifyLocations = async (page = 1) => {
     let response = await axios({
         method: "GET",
         url: `https://copilot-custom-app-demo.herokuapp.com/api/database/rows/table/9/?user_field_names=true&page=${page}`,
@@ -44,7 +45,7 @@ let allStudents = []
 let miniStudents = []
 let i = 1
 
-export const minifyStudents = async (page) => {
+const minifyStudents = async (page) => {
     let response = await axios({
         method: "GET",
         url: `https://copilot-custom-app-demo.herokuapp.com/api/database/rows/table/33/?user_field_names=true&page=${page}`,
@@ -107,7 +108,7 @@ const updateLink = async (rowId, locationId) => {
     }).then(console.log(`updated row: ${rowId}`))
 }
 
-export const updateRow = async (page, locations) => {
+const updateRow = async (page, locations) => {
     // let locations = await minifyLocations()
     let students = await minifyStudents(page)
     let linkId;
@@ -120,7 +121,7 @@ export const updateRow = async (page, locations) => {
 
 }
 
-export const updateRowLoop = async () => {
+const updateRowLoop = async () => {
     let locations = await minifyLocations()
     let num = 18;
     while (num < 440) {
@@ -132,3 +133,4 @@ export const updateRowLoop = async () => {
 }
 
 
+updateRowLoop()
